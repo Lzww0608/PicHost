@@ -2,20 +2,6 @@
 #include <sstream>
 using namespace std;
 
-/**
- * @file util.cc
- * @brief 工具类实现文件
- * 
- * 本文件包含了一些通用工具类和函数的实现:
- * - CRefObject: 引用计数基类,提供对象生命周期管理
- * - CStrExplode: 字符串分割工具类
- * - 时间相关函数: GetTickCount, util_sleep
- * - 字符串处理函数: ReplaceStr, Int2String, String2Int, ReplaceMark等
- * - URL编解码函数: URLEncode, URLDecode
- * - 文件操作函数: GetFileSize, WritePid
- * - 内存查找函数: MemFind
- */
-
 CRefObject::CRefObject() {
     lock_ = NULL;
     ref_count_ = 1;
@@ -198,13 +184,6 @@ inline unsigned char FromHex(const unsigned char &x) {
     return isdigit(x) ? x - '0' : x - 'A' + 10;
 }
 
-/**
- * URL编码字符串
- * @param in 输入字符串
- * @return 编码后的字符串
- * @note 将非字母数字字符转换为%XX格式,其中XX为字符的16进制ASCII码
- *       例如空格可以编码为%20或+
- */
 string URLEncode(const string &in) {
     string out;
     for (size_t ix = 0; ix < in.size(); ix++) {
@@ -228,7 +207,6 @@ string URLEncode(const string &in) {
     return out;
 }
 
-
 string URLDecode(const string &in) {
     string out;
     for (size_t ix = 0; ix < in.size(); ix++) {
@@ -246,12 +224,7 @@ string URLDecode(const string &in) {
     }
     return out;
 }
-/**
- * 获取文件大小
- * @param path 文件路径
- * @return 文件大小(字节),-1表示获取失败
- * @note 使用stat系统调用获取文件信息
- */
+
 int64_t GetFileSize(const char *path) {
     int64_t filesize = -1;
     struct stat statbuff;
@@ -263,16 +236,6 @@ int64_t GetFileSize(const char *path) {
     return filesize;
 }
 
-/**
- * 在源字符串中查找子串
- * @param src_str 源字符串
- * @param src_len 源字符串长度
- * @param sub_str 要查找的子串
- * @param sub_len 子串长度,如果为0则自动计算
- * @param flag true表示从前往后查找,false表示从后往前查找
- * @return 找到则返回子串在源串中的位置指针,否则返回NULL
- * @note 使用memcmp进行内存比较,支持二进制数据
- */
 const char *MemFind(const char *src_str, size_t src_len, const char *sub_str,
                     size_t sub_len, bool flag) {
     if (NULL == src_str || NULL == sub_str || src_len <= 0) {

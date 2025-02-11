@@ -1,38 +1,37 @@
+/*================================================================
+*   Copyright (C) 2014 All rights reserved.
+*
+*   文件名称：Lock.h
+*   创 建 者：Zhang Yuanhao
+*   邮    箱：bluefoxah@gmail.com
+*   创建日期：2014年09月10日
+*   描    述：
+*
+#pragma once
+================================================================*/
+
 #ifndef __LOCK_H__
 #define __LOCK_H__
 
 #include "ostype.h"
 
-
-// CLock类提供了一个跨平台的互斥锁实现
 class CLock {
-public:
-    // 构造函数,初始化互斥锁
+  public:
     CLock();
-    // 析构函数,销毁互斥锁
     virtual ~CLock();
-
-    // 加锁操作
     void lock();
-    // 解锁操作
     void unlock();
-    // 获取底层pthread互斥锁对象
     pthread_mutex_t &getMutex() { return lock_; }
 #ifndef _WIN32
-    // 尝试加锁,如果锁被占用则立即返回false
     virtual bool try_lock();
 #endif
-
-private:
+  private:
 #ifdef _WIN32
-    // Windows平台使用临界区实现
     CRITICAL_SECTION m_critical_section;
 #else
-    // Unix/Linux平台使用pthread互斥锁实现
     pthread_mutex_t lock_;
 #endif
 };
-
 
 #ifndef _WIN32
 class CRWLock {
@@ -59,7 +58,6 @@ class CAutoRWLock {
 };
 
 #endif
-
 
 class CAutoLock {
   public:

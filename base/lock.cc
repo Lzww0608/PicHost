@@ -1,4 +1,14 @@
-
+/*================================================================
+*   Copyright (C) 2014 All rights reserved.
+*
+*   文件名称：Lock.cpp
+*   创 建 者：Zhang Yuanhao
+*   邮    箱：bluefoxah@gmail.com
+*   创建日期：2014年09月10日
+*   描    述：
+*
+#include "lock.h"
+================================================================*/
 
 #include "lock.h"
 
@@ -34,6 +44,9 @@ void CLock::unlock() {
 #endif
 }
 
+#ifndef _WIN32
+bool CLock::try_lock() { return pthread_mutex_trylock(&lock_) == 0; }
+#endif
 
 #ifndef _WIN32
 CRWLock::CRWLock() { pthread_rwlock_init(&lock_, NULL); }
@@ -67,7 +80,6 @@ CAutoRWLock::~CAutoRWLock() {
     }
 }
 #endif
-
 
 CAutoLock::CAutoLock(CLock *pLock) {
     m_pLock = pLock;
