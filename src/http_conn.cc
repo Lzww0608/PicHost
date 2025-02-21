@@ -1,10 +1,3 @@
-/*
- * HttpConn.cpp
- *  Modify on: 2022-10-30
- * 		Author: darren
- *  Created on: 2013-9-29
- *      Author: ziteng@mogujie.com
- */
 
 #include "http_conn.h"
 #include "api_common.h"
