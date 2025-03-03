@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
     uint32_t thread_num = atoi(str_thread_num);
 
     LogInfo("main into"); //单例模式 日志库 spdlog
-    LogInfo("main into2 {}", "darren"); // 只是为了测试日志
+    LogInfo("main into2 {}", "lzww"); // 只是为了测试日志
 
 
     // 初始化mysql、redis连接池，内部也会读取读取配置文件tc_http_server.conf
