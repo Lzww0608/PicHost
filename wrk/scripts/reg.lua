@@ -24,7 +24,7 @@ end
 
 request = function()
     local request_body = {
-        email = "472251823@qq.com",
+        email = "1094693070@qq.com",
         firstPwd = "e10adc3949ba59abbe56e057f20f883e",
         nickName = randomLetter(15),
         phone = "18612345678",

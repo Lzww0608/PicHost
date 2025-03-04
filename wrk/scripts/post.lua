@@ -2,7 +2,7 @@
 -- HTTP method, body, and adding a header
 
 -- wrk.method = "POST"
--- wrk.body   = "{"email": "472251823@qq.com", "firstPwd": "e10adc3949ba59abbe56e057f20f883e", "nickName": "lucky", "phone": "18612345678", "userName": "qingfu"}"
+-- wrk.body   = "{"email": "1094693070@qq.com", "firstPwd": "e10adc3949ba59abbe56e057f20f883e", "nickName": "lucky", "phone": "18612345678", "userName": "lzww"}"
 -- wrk.headers["Content-Type"] = "application/json"
 function random(n, m)
     math.randomseed(os.clock()*math.random(1000000,90000000)+math.random(1000000,90000000))
@@ -18,7 +18,7 @@ function randomLetter(len)
 end
 
 local request_body = {
-    email = "472251823@qq.com",
+    email = "1094693070@qq.com",
     firstPwd = "e10adc3949ba59abbe56e057f20f883e",
     nickName = randomLetter(15),
     phone = "18612345678",
@@ -32,7 +32,7 @@ request = function()
     print("req")
     wrk.method = "POST"
     -- wrk.body = '{"username":"admin","password":"123456"}'
-    wrk.body   = '{"email": "472251823@qq.com", "firstPwd": "e10adc3949ba59abbe56e057f20f883e", "nickName": "lucky", "phone": "18612345678", "userName": "qingfu"}'
+    wrk.body   = '{"email": "1094693070@qq.com", "firstPwd": "e10adc3949ba59abbe56e057f20f883e", "nickName": "lucky", "phone": "18612345678", "userName": "lzww"}'
     wrk.headers["Content-Type"] = "application/json"
     return  wrk.format(wrk.method,"/api/reg",wrk.headers, wrk.body)
 end

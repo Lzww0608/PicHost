@@ -4,8 +4,8 @@
 request = function()
     -- print("req")
     wrk.method = "POST"
-    -- 用户名 Darren；密码：这里是123456做md5的结果
-    wrk.body = '{"user":"qingfu","pwd":"e10adc3949ba59abbe56e057f20f883e"}'
+    -- 用户名 Lzww；密码：这里是123456做md5的结果
+    wrk.body = '{"user":"Lzww","pwd":"e10adc3949ba59abbe56e057f20f883e"}'
     wrk.headers["Content-Type"] = "application/json"
     return  wrk.format(wrk.method,"/api/login",wrk.headers, wrk.body)
 end
