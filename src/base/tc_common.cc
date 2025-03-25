@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 /**
  * @brief  去掉一个字符串两边的空白字符
@@ -148,17 +149,36 @@ int VerifyToken(string &user_name, string &token) {
 
     return ret;
 }
-// 这个随机字符串是有问题的
+
 string RandomString(const int len) /*参数为字符串的长度*/
 {
     /*初始化*/
     string str; /*声明用来保存随机字符串的str*/
     char c;     /*声明字符c，用来保存随机生成的字符*/
     int idx;    /*用来循环的变量*/
+    
+    /*确保随机数生成器已被初始化*/
+    static bool initialized = false;
+    if (!initialized) {
+        srand(time(NULL) ^ (getpid() << 16));
+        initialized = true;
+    }
+    
     /*循环向字符串中添加随机生成的字符*/
     for (idx = 0; idx < len; idx++) {
-        /*rand()%26是取余，余数为0~25加上'a',就是字母a~z,详见asc码表*/
-        c = 'a' + rand() % 26;
+        /*生成随机字符，包括大小写字母和数字*/
+        int type = rand() % 3;
+        switch (type) {
+            case 0:
+                c = 'a' + rand() % 26; /*小写字母a-z*/
+                break;
+            case 1:
+                c = 'A' + rand() % 26; /*大写字母A-Z*/
+                break;
+            case 2:
+                c = '0' + rand() % 10; /*数字0-9*/
+                break;
+        }
         str.push_back(c); /*push_back()是string类尾插函数。这里插入随机字符c*/
     }
     return str; /*返回生成的随机字符串*/
