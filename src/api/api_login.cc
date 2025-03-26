@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 
+
 #include "http_conn.h"
 
 #define LOGIN_RET_OK 0   // 成功
@@ -120,7 +121,13 @@ int setToken(string &user_name, string &token) {
     CacheConn *cache_conn = cache_manager->GetCacheConn("token");
     AUTO_REL_CACHECONN(cache_manager, cache_conn);
 
-    token = RandomString(32); // 随机32个字母
+
+    
+    // string random_str = RandomString(32); // 随机32个字母
+    // string base64_str = base64_encode(user_name); // 用户名的base64编码
+    // string md5_str = MD5(user_name); // 用户名的md5值
+    // token = random_str + base64_str + md5_str; // 组合token
+    token = RandomString(32);
 
     if (cache_conn) {
         //用户名：token, 86400有效时间为24小时
